@@ -1,0 +1,17 @@
+Options -MultiViews
+RewriteEngine On
+RewriteBase /tugasku/public/
+
+# Serve existing files directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Route /api/* to api/index.php
+RewriteRule ^api/(.*)$ api/index.php [L,QSA]
+
+# Route PHP pages
+RewriteRule ^$ index.php [L,QSA]
+RewriteRule ^cari/?$ cari.php [L,QSA]
+RewriteRule ^tugas/?$ tugas.php [L,QSA]
+RewriteRule ^matakuliah/?$ matakuliah.php [L,QSA]

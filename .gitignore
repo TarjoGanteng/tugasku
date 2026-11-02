@@ -1,0 +1,6 @@
+# TugasKu .gitignore
+config/config.local.php
+.vercel
+*.log
+.DS_Store
+Thumbs.db
