@@ -33,3 +33,4 @@ if (isset($pages[$path])) {
 http_response_code(404);
 header('Content-Type: text/plain; charset=utf-8');
 echo '404 - Halaman tidak ditemukan.';
+

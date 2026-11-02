@@ -25,6 +25,18 @@ class Db
                 PDO::ATTR_EMULATE_PREPARES   => false, // NFR-05
             ];
 
+            // SSL untuk database cloud (TiDB Cloud / Aiven) — aktif bila env DB_SSL=true
+            if (filter_var(getenv('DB_SSL'), FILTER_VALIDATE_BOOLEAN)) {
+                $ca = getenv('DB_SSL_CA') ?: null;
+                if (!$ca) {
+                    foreach (['/etc/pki/tls/certs/ca-bundle.crt', '/etc/ssl/certs/ca-certificates.crt', '/etc/ssl/cert.pem'] as $f) {
+                        if (is_readable($f)) { $ca = $f; break; }
+                    }
+                }
+                if ($ca) $options[PDO::MYSQL_ATTR_SSL_CA] = $ca;
+                $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+            }
+
             try {
                 self::$instance = new PDO($dsn, DB_USER, DB_PASS, $options);
                 // Set timezone WIB (A06)
