@@ -12,8 +12,9 @@ class Db
     {
         if (self::$instance === null) {
             $dsn = sprintf(
-                'mysql:host=%s;dbname=%s;charset=%s',
+                'mysql:host=%s;port=%s;dbname=%s;charset=%s',
                 DB_HOST,
+                defined('DB_PORT') ? DB_PORT : '3306',
                 DB_NAME,
                 DB_CHARSET
             );
