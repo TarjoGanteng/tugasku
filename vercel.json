@@ -1,22 +1,15 @@
 {
-  "version": 2,
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "node -e \"require('fs').cpSync('public/assets','dist/assets',{recursive:true})\"",
+  "outputDirectory": "dist",
   "functions": {
-    "public/**/*.php": {
-      "runtime": "vercel-php@0.7.2"
+    "api/index.php": {
+      "runtime": "vercel-php@0.9.0",
+      "includeFiles": "{public,src,config}/**"
     }
   },
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/public/api/index.php"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/public/assets/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/public/$1"
-    }
+  "rewrites": [
+    { "source": "/((?!assets/).*)", "destination": "/api/index.php" }
   ]
 }

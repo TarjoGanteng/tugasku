@@ -1,6 +1,7 @@
 # TugasKu .gitignore
 config/config.local.php
 .vercel
+dist/
 *.log
 .DS_Store
 Thumbs.db
